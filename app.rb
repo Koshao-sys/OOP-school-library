@@ -44,7 +44,7 @@ class App
       puts "#{idx}) [#{person.class.name}] Name #{person.name}, ID #{person.id}, Age #{person.age}"
     end
     person_index = gets.chomp.to_i
-    puts 'Date:-'
+    puts 'Date:- e.g dd-mm-yyyy'
     date = gets.chomp
     Rental.new(@books[book_index], @peoples[person_index], date)
   end

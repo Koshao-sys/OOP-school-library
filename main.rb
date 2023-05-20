@@ -1,4 +1,5 @@
 require_relative 'app'
+require 'pry'
 
 def list_option
   puts ''
@@ -39,7 +40,7 @@ end
 
 def handel_option(option, app)
   case option
-  when 3
+  when 2
     create_person(app)
   when 4
     app.create_book
