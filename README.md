@@ -42,13 +42,13 @@ After you're finished please remove all the comments and instructions!
   - [🛠 Built With](#built-with)
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
-  <!--- [🚀 Live Demo](#live-demo)-->
+    <!--- [🚀 Live Demo](#live-demo)-->
 - [💻 Getting Started](#getting-started)
   - [Setup](#setup)
   - [Prerequisites](#prerequisites)
   - [Install](#install)
-  <!--- [Usage](#usage)-->
-  <!--- [Run tests](#run-tests)
+    <!--- [Usage](#usage)-->
+    <!--- [Run tests](#run-tests)
   - [Deployment](#deployment)-->
 - [👥 Authors](#authors)
 - [🔭 Future Features](#future-features)
@@ -184,6 +184,12 @@ Example:
 - GitHub: [@gKoshao-sys](https://github.com/Koshao-sys/)
 - Twitter: [@KoshaoKG](https://twitter.com/KoshaoKG)
 - LinkedIn: [koshaokazungu](https://www.linkedin.com/in/koshaokazungu/)
+
+👤 **Koshao Godfrey Kazungu**
+
+- GitHub: [@githubhandle](https://github.com/Adholah96)
+- Twitter: [@twitterhandle](https://twitter.com/nerdy_me_)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/heldricks-arthur/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
