@@ -1,4 +1,7 @@
 require_relative 'nameable'
+require_relative 'capitalize_decorator'
+require_relative 'trimmer_decorator'
+require_relative 'rental'
 
 class Person < Nameable
   attr_reader :id, :parent_permission
@@ -9,7 +12,12 @@ class Person < Nameable
     @name = name
     @age = age
     @parent_permission = parent_permission
+    @rentals = []
     super()
+  end
+
+  def add_rental(book, date)
+    Rental.new(book, self, date)
   end
 
   def can_use_services?
