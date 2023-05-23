@@ -13,17 +13,17 @@ def list_option
 end
 
 def main
-  status = true
-  app = App.new
-  while status
+  state = true
+  application = App.new
+  while state
     list_option
     option = gets.chomp.to_i
     if option == 1
-      app.list_all_books
+      application.list_all_books
     elsif option == 2
-      app.list_all_peoples
+      application.list_all_peoples
     else
-      status = app.handel_option(option)
+      status = application.handel_option(option)
     end
   end
 end
