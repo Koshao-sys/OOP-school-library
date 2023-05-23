@@ -23,7 +23,7 @@ def main
     elsif option == 2
       application.list_all_peoples
     else
-      status = application.handel_option(option)
+      application.handel_option(option)
     end
   end
 end

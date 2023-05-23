@@ -69,7 +69,7 @@ class App
     puts 'Has parent permission?[Y/N]'
     val = gets.chomp
     parent_permission = false if %w[N n NO no No].include?(val)
-  
+
     case option.to_i
     when 1
       create_student(age, name, parent_permission)
@@ -81,7 +81,7 @@ class App
       puts 'Invalid input ):'
     end
   end
-  
+
   def handel_option(option)
     case option
     when 3
