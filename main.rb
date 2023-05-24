@@ -1,5 +1,5 @@
 require_relative 'app'
-require 'pry'
+
 
 class Main
   def initialize
