@@ -1,6 +1,5 @@
 require_relative 'app'
 
-
 class Main
   def initialize
     @app = App.new
@@ -17,17 +16,30 @@ class Main
     puts '7 - Exit'
   end
 
+  def create_person_input(option)
+    puts 'age:-'
+    age = gets.chomp.to_i
+    puts 'name:-'
+    name = gets.chomp
+    parent_permission = check_permission
+    create_person(option, age, name, parent_permission)
+  end
+
   def create_person(option, age, name, parent_permission)
     case option.to_i
     when 1
       @app.create_student(age, name, parent_permission)
     when 2
-      puts 'specialization:-'
-      specialization = gets.chomp
-      @app.create_teacher(age, specialization, name, parent_permission)
+      create_teacher(age, name, parent_permission)
     else
       puts 'Invalid input ):'
     end
+  end
+
+  def create_teacher(age, name, parent_permission)
+    puts 'specialization:-'
+    specialization = gets.chomp
+    @app.create_teacher(age, specialization, name, parent_permission)
   end
 
   def check_permission
@@ -44,46 +56,35 @@ class Main
     end
   end
 
-  def create_person_input(option)
-    puts 'age:-'
-    age = gets.chomp.to_i
-    puts 'name:-'
-    name = gets.chomp
-    parent_permission = check_permission
-    create_person(option, age, name, parent_permission)
-  end
-
   def data
     @app.load_data
   end
 
-  def handel_option(option)
+  def handle_writing_and_exit
+    @app.handle_writing
+  end
+
+  def handle_option(option)
     case option
     when 1
       @app.list_all_books
     when 2
       @app.list_all_peoples
     when 3
-      puts 'Do you want to create a student(1) or a teacher(2)? [Input the number]:-'
-      option = gets.chomp
-      create_person_input(option)
+      create_person_menu
     when 4
       @app.create_book
     when 5
       @app.create_rental
     when 6
-      puts 'Enter person ID:-'
-      id = gets.chomp.to_i
-      @app.list_person_rentals(id)
-    when 7
-      puts ''
-      puts 'Writing data and preparing exit...'
-      puts ' '
-      @app.write_peoples
-      @app.write_books
-      @app.write_rentals
-      exit
+      @app.list_person_rentals
     end
+  end
+
+  def create_person_menu
+    puts 'Do you want to create a student(1) or a teacher(2)? [Input the number]:-'
+    option = gets.chomp
+    create_person_input(option)
   end
 end
 
@@ -96,9 +97,11 @@ def main
     option = gets.chomp.to_i
     if option < 1 || option > 7
       puts 'Invalid number :('
-      main.list_option
+    elsif option == 7
+      main.handle_writing_and_exit
+      exit
     else
-      main.handel_option(option)
+      main.handle_option(option)
     end
   end
 end

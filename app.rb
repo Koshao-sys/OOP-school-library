@@ -16,10 +16,17 @@ class App
     @books_path = './data/books.json'
   end
 
+  def handle_writing
+    puts 'Writing data and preparing exit...'
+    write_peoples
+    write_books
+    write_rentals
+  end
+
   def read_people(json_data)
     json_data.each_line do |line|
       data = JSON.parse(line)
-      if line_of_code.include?('specialization')
+      if line.include?('specialization')
         teacher = Teacher.new(data['age'], data['specialization'], name: data['name'], parent_permission: true)
         @peoples << teacher
       else
@@ -47,15 +54,21 @@ class App
 
   def load_data
     if File.exist?(@peoples_path)
-      people_data = File.read(@peoples_path)
-      read_people(people_data)
+      File.open(@peoples_path, 'r') do |file|
+        people_data = file.read
+        read_people(people_data)
+      end
     end
     if File.exist?(@books_path)
-      books_data = File.read(@books_path)
-      read_books(books_data)
+      File.open(@books_path, 'r') do |file|
+        books_data = file.read
+        read_books(books_data)
+      end
     end
-    if File.exist?(@rentals_path)
-      rentals_data = File.read(@rentals_path)
+    return unless File.exist?(@rentals_path)
+
+    File.open(@rentals_path, 'r') do |file|
+      rentals_data = file.read
       read_rentals(rentals_data)
     end
   end
