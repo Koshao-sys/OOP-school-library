@@ -2,11 +2,75 @@ require_relative 'teacher'
 require_relative 'student'
 require_relative 'book'
 require_relative 'rental'
+require_relative 'write_files'
+require 'json'
 
 class App
   def initialize
     @books = []
     @peoples = []
+    @rentals = []
+    @writer = Writer.new
+    @peoples_path = './data/peoples.json'
+    @rentals_path = './data/rentals.json'
+    @books_path = './data/books.json'
+  end
+
+  def handle_writing
+    puts 'Writing data and preparing exit...'
+    write_peoples
+    write_books
+    write_rentals
+  end
+
+  def read_people(json_data)
+    json_data.each_line do |line|
+      data = JSON.parse(line)
+      if line.include?('specialization')
+        teacher = Teacher.new(data['age'], data['specialization'], name: data['name'], parent_permission: true)
+        @peoples << teacher
+      else
+        student = Student.new(data['age'], name: data['name'], parent_permission: data[parent_permission])
+        @peoples << student
+      end
+    end
+  end
+
+  def read_books(json_data)
+    json_data.each_line do |line|
+      data = JSON.parse(line)
+      book = Book.new(data['title'], data['author'])
+      @books << book
+    end
+  end
+
+  def read_rentals(json_data)
+    json_data.each_line do |line|
+      data = JSON.parse(line)
+      rental = Book.new(data['title'], data['author'])
+      @rentals << rental
+    end
+  end
+
+  def load_data
+    if File.exist?(@peoples_path)
+      File.open(@peoples_path, 'r') do |file|
+        people_data = file.read
+        read_people(people_data)
+      end
+    end
+    if File.exist?(@books_path)
+      File.open(@books_path, 'r') do |file|
+        books_data = file.read
+        read_books(books_data)
+      end
+    end
+    return unless File.exist?(@rentals_path)
+
+    File.open(@rentals_path, 'r') do |file|
+      rentals_data = file.read
+      read_rentals(rentals_data)
+    end
   end
 
   def list_all_books
@@ -17,6 +81,18 @@ class App
     @peoples.each do |people|
       puts "[#{people.class.name}] Name:- #{people.name} ID:- #{people.id} Age:- #{people.age} \n"
     end
+  end
+
+  def write_books
+    @writer.book_writer(@books, @books_path)
+  end
+
+  def write_rentals
+    @writer.rentals_writer(@rentals, @rentals_path)
+  end
+
+  def write_peoples
+    @writer.people_writer(@peoples, @peoples_path)
   end
 
   def create_teacher(age, specialization, name, parent_permission)
@@ -46,7 +122,7 @@ class App
     person_index = gets.chomp.to_i
     puts 'Date:- e.g dd-mm-yyyy'
     date = gets.chomp
-    Rental.new(@books[book_index], @peoples[person_index], date)
+    @rentals << Rental.new(@books[book_index], @peoples[person_index], date)
   end
 
   def list_person_rentals(person_id)
