@@ -53,6 +53,10 @@ class Main
     create_person(option, age, name, parent_permission)
   end
 
+  def data
+    @app.load_data
+  end
+
   def handel_option(option)
     case option
     when 1
@@ -71,6 +75,14 @@ class Main
       puts 'Enter person ID:-'
       id = gets.chomp.to_i
       @app.list_person_rentals(id)
+    when 7
+      puts ''
+      puts 'Writing data and preparing exit...'
+      puts ' '
+      @app.write_peoples
+      @app.write_books
+      @app.write_rentals
+      exit
     end
   end
 end
@@ -78,13 +90,16 @@ end
 def main
   main = Main.new
   puts 'Welcome to School Library App!'
+  main.data
   loop do
     main.list_option
     option = gets.chomp.to_i
-    break if option == 7
-
-    puts 'Invalid number :(' if option < 1 || option > 7
-    main.handel_option(option)
+    if option < 1 || option > 7
+      puts 'Invalid number :('
+      main.list_option
+    else
+      main.handel_option(option)
+    end
   end
 end
 
