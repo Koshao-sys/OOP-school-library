@@ -6,7 +6,7 @@ RSpec.describe CapitalizeDecorator do
 
   describe '#correct_name' do
     it 'capitalizes the name' do
-      expect(decorator.correct_name).to eq('John doe')
+      expect(decorator.correct_name).to eq('Kevin doe')
     end
   end
 end
